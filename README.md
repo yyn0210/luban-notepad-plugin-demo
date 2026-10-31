@@ -3,16 +3,21 @@
 Example plugins and catalog fixtures used to exercise the Luban Notepad plugin
 store end to end.
 
-The repository hosts two catalog snapshots:
+The repository hosts four catalog snapshots:
 
 ```text
 https://raw.githubusercontent.com/yyn0210/luban-notepad-plugin-demo/main/catalog/v1/index.json
 https://raw.githubusercontent.com/yyn0210/luban-notepad-plugin-demo/main/catalog/v2/index.json
+https://raw.githubusercontent.com/yyn0210/luban-notepad-plugin-demo/main/catalog/v3/index.json
+https://raw.githubusercontent.com/yyn0210/luban-notepad-plugin-demo/main/catalog/bad-version/index.json
 ```
 
 - `v1` lists `com.luban.demo.hello` 1.0.0 plus the platform and API fixtures.
 - `v2` adds `com.luban.demo.hello` 1.1.0 (update test) and a deliberately
   corrupted hash entry (download verification test).
+- `v3` adds a bad-size entry and an invalid entry that the parser must skip.
+- `bad-version` declares `catalog_version` 2, which this client must reject as a
+  whole.
 
 Plugin packages are published as GitHub Release assets. Every catalog entry
 carries the SHA-256 and byte size of its package.
@@ -25,6 +30,8 @@ scripts/package.py               build dist/<id>-<version>.zip deterministically
 scripts/build_catalog.py         generate catalog/v1 and catalog/v2 from dist/
 catalog/v1/index.json            first snapshot (hello 1.0.0)
 catalog/v2/index.json            second snapshot (hello 1.1.0, bad hash)
+catalog/v3/index.json            third snapshot (bad size, invalid entry)
+catalog/bad-version/index.json   unsupported catalog_version 2
 ```
 
 ## Fixtures
@@ -36,6 +43,8 @@ catalog/v2/index.json            second snapshot (hello 1.1.0, bad hash)
 | `com.luban.demo.windows` | `windows-x64` only; must be hidden on other platforms |
 | `com.luban.demo.newer-api` | `api_version` 99; listed but not installable |
 | `com.luban.demo.badhash` | v2 only; SHA-256 mismatch must abort installation |
+| `com.luban.demo.badsize` | v3 only; declared size smaller than the package must abort the download |
+| `com.luban.demo.invalid` | v3 only; non-HTTPS artifact URL must be skipped with a warning |
 
 ## Build packages
 
@@ -63,6 +72,9 @@ files are committed because the editor reads them directly over HTTPS.
    the run counter must continue instead of restarting.
 4. Select `com.luban.demo.badhash` and install; the download must be rejected
    before anything is written to the plugin directory.
+5. Point the URL at the `v3` catalog; the invalid entry must be skipped with a
+   warning and `com.luban.demo.badsize` must fail on the declared size.
+6. Point the URL at `bad-version`; the whole catalog must be rejected.
 
 The plugins only write inside their own data directory and log markers prefixed
 with `DEMO_`.
