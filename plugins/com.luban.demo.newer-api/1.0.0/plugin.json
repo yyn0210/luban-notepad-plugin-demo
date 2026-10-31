@@ -1,0 +1,20 @@
+{
+  "id": "com.luban.demo.newer-api",
+  "name": "Newer API",
+  "version": "1.0.0",
+  "api_version": 99,
+  "main": "main.lua",
+  "description": "Requires host API 99; listed but not installable.",
+  "author": "yyn0210",
+  "permissions": [],
+  "contributes": {
+    "commands": [
+      {
+        "id": "demo.newer.run",
+        "label": "Demo: Newer API",
+        "entry": "run",
+        "when": "always"
+      }
+    ]
+  }
+}

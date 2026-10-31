@@ -1,0 +1,37 @@
+{
+  "id": "com.luban.demo.hello",
+  "name": "Hello Demo",
+  "version": "1.1.0",
+  "api_version": 1,
+  "main": "main.lua",
+  "description": "Demo plugin for testing the Luban Notepad plugin store.",
+  "author": "yyn0210",
+  "permissions": ["filesystem"],
+  "contributes": {
+    "commands": [
+      {
+        "id": "demo.hello.run",
+        "label": "Demo: Say hello",
+        "description": "Insert a greeting and record a run in the plugin data directory.",
+        "entry": "run",
+        "when": "edit_text"
+      }
+    ],
+    "settings": [
+      {
+        "key": "greeting",
+        "type": "string",
+        "label": "Greeting",
+        "default": "Hello from the plugin store",
+        "max_length": 120
+      },
+      {
+        "key": "punctuation",
+        "type": "string",
+        "label": "Punctuation",
+        "default": "!",
+        "max_length": 8
+      }
+    ]
+  }
+}
