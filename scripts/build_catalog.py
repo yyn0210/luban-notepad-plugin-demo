@@ -119,6 +119,40 @@ METADATA: dict[str, dict[str, Any]] = {
             }
         },
     },
+    "com.luban.demo.badsize": {
+        "name": "Bad Size",
+        "description": "Catalog size is smaller than the package; download must be rejected.",
+        "publisher": "yyn0210",
+        "tags": ["demo", "error"],
+        "permissions": [],
+        "license": "MIT",
+        "source": "https://github.com/yyn0210/luban-notepad-plugin-demo/tree/main/plugins/com.luban.demo.badsize",
+        "homepage": "https://github.com/yyn0210/luban-notepad-plugin-demo",
+        "versions": {
+            "1.0.0": {
+                "release_notes": "Declared size is 100 bytes.",
+                "targets": ["universal"],
+                "size_override": 100,
+            }
+        },
+    },
+    "com.luban.demo.invalid": {
+        "name": "Invalid Entry",
+        "description": "Artifact URL is not HTTPS; the catalog parser must skip this entry.",
+        "publisher": "yyn0210",
+        "tags": ["demo", "error"],
+        "permissions": [],
+        "license": "MIT",
+        "source": "https://github.com/yyn0210/luban-notepad-plugin-demo",
+        "homepage": "https://github.com/yyn0210/luban-notepad-plugin-demo",
+        "versions": {
+            "1.0.0": {
+                "release_notes": "Deliberately invalid artifact URL.",
+                "targets": ["universal"],
+                "url_override": "http://example.com/com.luban.demo.invalid-1.0.0.zip",
+            }
+        },
+    },
 }
 
 # hello 1.0.0 exists in both snapshots; 1.1.0 and the bad-hash fixture are
@@ -135,6 +169,14 @@ V2_PLUGINS = [
     "com.luban.demo.windows",
     "com.luban.demo.newer-api",
     "com.luban.demo.badhash",
+]
+V3_PLUGINS = [
+    "com.luban.demo.hello",
+    "com.luban.demo.linux",
+    "com.luban.demo.windows",
+    "com.luban.demo.newer-api",
+    "com.luban.demo.badsize",
+    "com.luban.demo.invalid",
 ]
 
 
@@ -158,7 +200,16 @@ def entry(plugin_id: str, versions: list[str], corrupt_hash: bool) -> dict[str, 
     version_entries = []
     for version in versions:
         spec = meta["versions"][version]
-        path = package(plugin_id, version)
+        url_override = spec.get("url_override")
+        if url_override:
+            artifact_url = url_override
+            artifact_hash = BAD_HASH
+            artifact_size = 1000
+        else:
+            path = package(plugin_id, version)
+            artifact_url = f"{RELEASE_BASE}/v{version}/{plugin_id}-{version}.zip"
+            artifact_hash = BAD_HASH if corrupt_hash else sha256(path)
+            artifact_size = spec.get("size_override", path.stat().st_size)
         version_entries.append(
             {
                 "version": version,
@@ -168,9 +219,9 @@ def entry(plugin_id: str, versions: list[str], corrupt_hash: bool) -> dict[str, 
                 "artifacts": [
                     {
                         "target": target,
-                        "url": f"{RELEASE_BASE}/v{version}/{plugin_id}-{version}.zip",
-                        "sha256": BAD_HASH if corrupt_hash else sha256(path),
-                        "size": path.stat().st_size,
+                        "url": artifact_url,
+                        "sha256": artifact_hash,
+                        "size": artifact_size,
                     }
                     for target in spec["targets"]
                 ],
@@ -224,6 +275,13 @@ def main() -> int:
     snapshots = {
         "v1": catalog(V1_PLUGINS, set(), {"com.luban.demo.hello": ["1.0.0"]}),
         "v2": catalog(V2_PLUGINS, {"com.luban.demo.badhash"}, {}),
+        "v3": catalog(V3_PLUGINS, set(), {}),
+        "bad-version": {
+            "catalog_version": 2,
+            "repository": REPOSITORY,
+            "generated_at": GENERATED_AT,
+            "plugins": [],
+        },
     }
     for name, value in snapshots.items():
         path = ROOT / "catalog" / name / "index.json"

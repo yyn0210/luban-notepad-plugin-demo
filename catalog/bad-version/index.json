@@ -1,0 +1,10 @@
+{
+  "catalog_version": 2,
+  "repository": {
+    "id": "luban-notepad-plugin-demo",
+    "name": "Luban Notepad Plugin Demo",
+    "homepage": "https://github.com/yyn0210/luban-notepad-plugin-demo"
+  },
+  "generated_at": "2026-11-01T00:00:00Z",
+  "plugins": []
+}

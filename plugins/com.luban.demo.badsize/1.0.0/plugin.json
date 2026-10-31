@@ -1,0 +1,20 @@
+{
+  "id": "com.luban.demo.badsize",
+  "name": "Bad Size",
+  "version": "1.0.0",
+  "api_version": 1,
+  "main": "main.lua",
+  "description": "Catalog size is smaller than the package; download must be rejected.",
+  "author": "yyn0210",
+  "permissions": [],
+  "contributes": {
+    "commands": [
+      {
+        "id": "demo.badsize.run",
+        "label": "Demo: Bad size",
+        "entry": "run",
+        "when": "always"
+      }
+    ]
+  }
+}

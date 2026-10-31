@@ -1,0 +1,225 @@
+{
+  "catalog_version": 1,
+  "repository": {
+    "id": "luban-notepad-plugin-demo",
+    "name": "Luban Notepad Plugin Demo",
+    "homepage": "https://github.com/yyn0210/luban-notepad-plugin-demo"
+  },
+  "generated_at": "2026-11-01T00:00:00Z",
+  "plugins": [
+    {
+      "id": "com.luban.demo.badsize",
+      "name": "Bad Size",
+      "description": "Catalog size is smaller than the package; download must be rejected.",
+      "publisher": "yyn0210",
+      "verified": false,
+      "tags": [
+        "demo",
+        "error"
+      ],
+      "permissions": [],
+      "source": "https://github.com/yyn0210/luban-notepad-plugin-demo/tree/main/plugins/com.luban.demo.badsize",
+      "homepage": "https://github.com/yyn0210/luban-notepad-plugin-demo",
+      "license": "MIT",
+      "latest_version": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "api_version": 1,
+          "released_at": "2026-11-01T00:00:00Z",
+          "release_notes": "Declared size is 100 bytes.",
+          "artifacts": [
+            {
+              "target": "universal",
+              "url": "https://github.com/yyn0210/luban-notepad-plugin-demo/releases/download/v1.0.0/com.luban.demo.badsize-1.0.0.zip",
+              "sha256": "b49351489774732b7934668dc2ff8e7d22cd43fb18b5a358194daea20d6d557b",
+              "size": 100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "com.luban.demo.hello",
+      "name": "Hello Demo",
+      "description": "Inserts a greeting and records every run in the plugin data directory.",
+      "publisher": "yyn0210",
+      "verified": false,
+      "tags": [
+        "demo",
+        "text"
+      ],
+      "permissions": [
+        "filesystem"
+      ],
+      "source": "https://github.com/yyn0210/luban-notepad-plugin-demo/tree/main/plugins/com.luban.demo.hello",
+      "homepage": "https://github.com/yyn0210/luban-notepad-plugin-demo",
+      "license": "MIT",
+      "latest_version": "1.1.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "api_version": 1,
+          "released_at": "2026-11-01T00:00:00Z",
+          "release_notes": "Initial demo release.",
+          "artifacts": [
+            {
+              "target": "universal",
+              "url": "https://github.com/yyn0210/luban-notepad-plugin-demo/releases/download/v1.0.0/com.luban.demo.hello-1.0.0.zip",
+              "sha256": "2810f26be4b4737e9839711fb82405ba93b0065404ef67bc963542c62641b2f4",
+              "size": 952
+            }
+          ]
+        },
+        {
+          "version": "1.1.0",
+          "api_version": 1,
+          "released_at": "2026-11-01T00:00:00Z",
+          "release_notes": "Adds configurable punctuation and keeps existing run data.",
+          "artifacts": [
+            {
+              "target": "universal",
+              "url": "https://github.com/yyn0210/luban-notepad-plugin-demo/releases/download/v1.1.0/com.luban.demo.hello-1.1.0.zip",
+              "sha256": "f97992bb76403492888ee3204c612c90587c1dfd763069ea33e7286df6d4bfb2",
+              "size": 992
+            }
+          ]
+        }
+      ],
+      "localizations": {
+        "zh-CN": {
+          "name": "你好示例",
+          "description": "插入问候语，并把每次运行记录到插件数据目录。"
+        }
+      }
+    },
+    {
+      "id": "com.luban.demo.invalid",
+      "name": "Invalid Entry",
+      "description": "Artifact URL is not HTTPS; the catalog parser must skip this entry.",
+      "publisher": "yyn0210",
+      "verified": false,
+      "tags": [
+        "demo",
+        "error"
+      ],
+      "permissions": [],
+      "source": "https://github.com/yyn0210/luban-notepad-plugin-demo",
+      "homepage": "https://github.com/yyn0210/luban-notepad-plugin-demo",
+      "license": "MIT",
+      "latest_version": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "api_version": 1,
+          "released_at": "2026-11-01T00:00:00Z",
+          "release_notes": "Deliberately invalid artifact URL.",
+          "artifacts": [
+            {
+              "target": "universal",
+              "url": "http://example.com/com.luban.demo.invalid-1.0.0.zip",
+              "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "size": 1000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "com.luban.demo.linux",
+      "name": "Linux Exact",
+      "description": "Published only for linux-x64 to exercise exact target matching.",
+      "publisher": "yyn0210",
+      "verified": false,
+      "tags": [
+        "demo",
+        "platform"
+      ],
+      "permissions": [],
+      "source": "https://github.com/yyn0210/luban-notepad-plugin-demo/tree/main/plugins/com.luban.demo.linux",
+      "homepage": "https://github.com/yyn0210/luban-notepad-plugin-demo",
+      "license": "MIT",
+      "latest_version": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "api_version": 1,
+          "released_at": "2026-11-01T00:00:00Z",
+          "release_notes": "linux-x64 only.",
+          "artifacts": [
+            {
+              "target": "linux-x64",
+              "url": "https://github.com/yyn0210/luban-notepad-plugin-demo/releases/download/v1.0.0/com.luban.demo.linux-1.0.0.zip",
+              "sha256": "ab9091ad9726bd793df6353974619415b140d7a9c5e3e1286ddd8368407d8ea3",
+              "size": 571
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "com.luban.demo.newer-api",
+      "name": "Newer API",
+      "description": "Requires host API 99; listed but not installable.",
+      "publisher": "yyn0210",
+      "verified": false,
+      "tags": [
+        "demo",
+        "api"
+      ],
+      "permissions": [],
+      "source": "https://github.com/yyn0210/luban-notepad-plugin-demo/tree/main/plugins/com.luban.demo.newer-api",
+      "homepage": "https://github.com/yyn0210/luban-notepad-plugin-demo",
+      "license": "MIT",
+      "latest_version": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "api_version": 99,
+          "released_at": "2026-11-01T00:00:00Z",
+          "release_notes": "Requires API 99.",
+          "artifacts": [
+            {
+              "target": "universal",
+              "url": "https://github.com/yyn0210/luban-notepad-plugin-demo/releases/download/v1.0.0/com.luban.demo.newer-api-1.0.0.zip",
+              "sha256": "76cefaed071490cfc8d54cbf26473f1a6558964146864407b1d874a3a78aa026",
+              "size": 539
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "com.luban.demo.windows",
+      "name": "Windows Only",
+      "description": "Published only for windows-x64; hidden on every other platform.",
+      "publisher": "yyn0210",
+      "verified": false,
+      "tags": [
+        "demo",
+        "platform"
+      ],
+      "permissions": [],
+      "source": "https://github.com/yyn0210/luban-notepad-plugin-demo/tree/main/plugins/com.luban.demo.windows",
+      "homepage": "https://github.com/yyn0210/luban-notepad-plugin-demo",
+      "license": "MIT",
+      "latest_version": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "api_version": 1,
+          "released_at": "2026-11-01T00:00:00Z",
+          "release_notes": "windows-x64 only.",
+          "artifacts": [
+            {
+              "target": "windows-x64",
+              "url": "https://github.com/yyn0210/luban-notepad-plugin-demo/releases/download/v1.0.0/com.luban.demo.windows-1.0.0.zip",
+              "sha256": "d4bd68869a7863cad62605e54b9e392ea6d97741f83d86a05e179cd61eaf6536",
+              "size": 574
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
